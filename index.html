@@ -1,109 +1,119 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-lang="zh">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的博客</title>
+  <title>我的博客 / 私のブログ</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- 顶部导航 -->
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo">
-        <a href="/">我的博客</a>
+        <a href="/">
+          <span class="lang lang-zh">我的博客</span>
+          <span class="lang lang-ja">私のブログ</span>
+        </a>
       </div>
+
       <nav class="nav">
-        <a href="#posts">文章</a>
-        <a href="#about">关于我</a>
+        <a href="#posts">
+          <span class="lang lang-zh">文章</span>
+          <span class="lang lang-ja">記事</span>
+        </a>
+        <a href="#about">
+          <span class="lang lang-zh">关于我</span>
+          <span class="lang lang-ja">プロフィール</span>
+        </a>
       </nav>
+
+      <!-- 右上角语言切换 -->
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="zh">中文</button>
+        <button class="lang-btn" data-lang="ja">日本語</button>
+      </div>
     </div>
   </header>
 
+  <!-- 顶部介绍区 -->
   <section class="hero">
     <div class="container">
-      <h1>你好，我是 XXX</h1>
+      <h1>
+        <span class="lang lang-zh">你好，我是 XXX</span>
+        <span class="lang lang-ja">こんにちは、XXXです</span>
+      </h1>
       <p class="hero-subtitle">
-        这里是我的个人博客，用来记录技术、生活和一些乱七八糟的想法。
+        <span class="lang lang-zh">
+          这里是我的个人博客，用来记录技术、生活和一些乱七八糟的想法。
+        </span>
+        <span class="lang lang-ja">
+          ここは、技術・日常生活・あれこれの雑多なアイデアを記録するための個人ブログです。
+        </span>
       </p>
-      <a href="#posts" class="btn-primary">开始阅读</a>
+      <a href="#posts" class="btn-primary">
+        <span class="lang lang-zh">开始阅读</span>
+        <span class="lang lang-ja">記事を読む</span>
+      </a>
     </div>
   </section>
 
-    <main class="container main-layout">
+  <!-- 主体布局 -->
+  <main class="container main-layout">
     <!-- 左侧：文章列表 -->
     <section id="posts" class="posts">
-      <h2>最新文章</h2>
+      <h2>
+        <span class="lang lang-zh">最新文章</span>
+        <span class="lang lang-ja">最新記事</span>
+      </h2>
 
       <!-- 文章卡片 1 -->
       <article class="post-card">
-        <a href="#" class="post-title">我的第一篇博客：从 0 开始搭建个人网站</a>
+        <a href="#" class="post-title">
+          <span class="lang lang-zh">我的第一篇博客：从 0 开始搭建个人网站</span>
+          <span class="lang lang-ja">初めてのブログ：ゼロから自分のサイトを作る</span>
+        </a>
         <div class="post-meta">
           <span>2025-11-13</span>
           <span>·</span>
-          <span>建站折腾记录</span>
+          <span class="lang lang-zh">建站折腾记录</span>
+          <span class="lang lang-ja">サイト構築メモ</span>
         </div>
         <p class="post-excerpt">
-          这篇文章记录了我如何购买域名、配置 GitHub Pages、自己写前端页面的全过程，希望对想搭博客的同学有一点帮助……
+          <span class="lang lang-zh">
+            这篇文章记录了我如何购买域名、配置 GitHub Pages、自己写前端页面的全过程，希望对想搭博客的同学有一点帮助……
+          </span>
+          <span class="lang lang-ja">
+            この投稿では、ドメイン取得から GitHub Pages の設定、フロントエンドのページを自作するまでの流れをまとめました。これからブログを作りたい人の参考になればうれしいです……
+          </span>
         </p>
-        <a href="#" class="post-readmore">阅读全文 →</a>
+        <a href="#" class="post-readmore">
+          <span class="lang lang-zh">阅读全文 →</span>
+          <span class="lang lang-ja">続きを読む →</span>
+        </a>
       </article>
 
       <!-- 文章卡片 2 -->
       <article class="post-card">
-        <a href="#" class="post-title">写博客的三个好处</a>
+        <a href="#" class="post-title">
+          <span class="lang lang-zh">写博客的三个好处</span>
+          <span class="lang lang-ja">ブログを書く 3 つのメリット</span>
+        </a>
         <div class="post-meta">
           <span>2025-11-10</span>
           <span>·</span>
-          <span>瞎聊</span>
+          <span class="lang lang-zh">瞎聊</span>
+          <span class="lang lang-ja">雑談</span>
         </div>
         <p class="post-excerpt">
-          记忆是会背叛人的，但文字不会。写博客其实是在和未来的自己对话……
+          <span class="lang lang-zh">
+            记忆是会背叛人的，但文字不会。写博客其实是在和未来的自己对话……
+          </span>
+          <span class="lang lang-ja">
+            記憶はいつか薄れていきますが、文章は残ります。ブログを書くことは、未来の自分と対話することでもあります……
+          </span>
         </p>
-        <a href="#" class="post-readmore">阅读全文 →</a>
-      </article>
-
-      <!-- TODO: 之后你可以复制上面的结构添加更多文章 -->
-    </section>
-
-    <!-- 右侧：侧边栏 -->
-    <aside class="sidebar">
-      <section class="card">
-        <h3>关于我</h3>
-        <p>
-          这里写一句简单的自我介绍：比如「后端 / 前端 / 全栈 / 学生 / 打工人」，
-          兴趣爱好、正在学习的东西等。
-        </p>
-      </section>
-
-      <section class="card">
-        <h3>联系我</h3>
-        <ul class="contact-list">
-          <li>邮箱：<a href="mailto:example@example.com">example@example.com</a></li>
-          <li>GitHub：<a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a></li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h3>标签</h3>
-        <div class="tag-list">
-          <span class="tag">编程</span>
-          <span class="tag">生活</span>
-          <span class="tag">折腾</span>
-          <span class="tag">随笔</span>
-        </div>
-      </section>
-    </aside>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span>© <span id="year"></span> 我的博客. Powered by GitHub Pages.</span>
-    </div>
-  </footer>
-
-  <!-- 小脚本：自动显示年份，可选 -->
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+        <a href="#" class="post-readmore">
+          <span class="lang lang-zh">阅读全文 →</span>
+          <span class="lang lang-ja">続きを読む →</span>
+        </a>
