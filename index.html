@@ -1,122 +1,65 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的博客 / 私のブログ</title>
+  <title>我的博客</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- 顶部导航 -->
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo">
-        <a href="/">
-          <span class="lang lang-zh">我的博客</span>
-          <span class="lang lang-ja">私のブログ</span>
-        </a>
+        <a href="/">我的博客</a>
       </div>
-
       <nav class="nav">
-        <a href="#posts">
-          <span class="lang lang-zh">文章</span>
-          <span class="lang lang-ja">記事</span>
-        </a>
-        <a href="#about">
-          <span class="lang lang-zh">关于我</span>
-          <span class="lang lang-ja">プロフィール</span>
-        </a>
+        <a href="#posts">文章</a>
+        <a href="#about">关于我</a>
       </nav>
-
-      <!-- 右上角语言切换 -->
-      <div class="lang-switch">
-        <button class="lang-btn active" data-lang="zh">中文</button>
-        <button class="lang-btn" data-lang="ja">日本語</button>
-      </div>
     </div>
   </header>
 
-  <!-- 顶部介绍区 -->
   <section class="hero">
     <div class="container">
-      <h1>
-        <span class="lang lang-zh">你好，我是 XXX</span>
-        <span class="lang lang-ja">こんにちは、XXXです</span>
-      </h1>
+      <h1>你好，我是 XXX</h1>
       <p class="hero-subtitle">
-        <span class="lang lang-zh">
-          这里是我的个人博客，用来记录技术、生活和一些乱七八糟的想法。
-        </span>
-        <span class="lang lang-ja">
-          ここは、技術・日常生活・あれこれの雑多なアイデアを記録するための個人ブログです。
-        </span>
+        这里是我的个人博客，用来记录技术、生活和一些乱七八糟的想法。
       </p>
-      <a href="#posts" class="btn-primary">
-        <span class="lang lang-zh">开始阅读</span>
-        <span class="lang lang-ja">記事を読む</span>
-      </a>
+      <a href="#posts" class="btn-primary">开始阅读</a>
     </div>
   </section>
 
-  <!-- 主体布局 -->
   <main class="container main-layout">
     <!-- 左侧：文章列表 -->
     <section id="posts" class="posts">
-      <h2>
-        <span class="lang lang-zh">最新文章</span>
-        <span class="lang lang-ja">最新記事</span>
-      </h2>
+      <h2>最新文章</h2>
 
       <!-- 文章卡片 1 -->
       <article class="post-card">
-        <a href="#" class="post-title">
-          <span class="lang lang-zh">我的第一篇博客：从 0 开始搭建个人网站</span>
-          <span class="lang lang-ja">初めてのブログ：ゼロから自分のサイトを作る</span>
-        </a>
+        <a href="#" class="post-title">我的第一篇博客：从 0 开始搭建个人网站</a>
         <div class="post-meta">
           <span>2025-11-13</span>
           <span>·</span>
-          <span class="lang lang-zh">建站折腾记录</span>
-          <span class="lang lang-ja">サイト構築メモ</span>
+          <span>建站折腾记录</span>
         </div>
         <p class="post-excerpt">
-          <span class="lang lang-zh">
-            这篇文章记录了我如何购买域名、配置 GitHub Pages、自己写前端页面的全过程，希望对想搭博客的同学有一点帮助……
-          </span>
-          <span class="lang lang-ja">
-            この投稿では、ドメイン取得から GitHub Pages の設定、フロントエンドのページを自作するまでの流れをまとめました。これからブログを作りたい人の参考になればうれしいです……
-          </span>
+          这篇文章记录了我如何购买域名、配置 GitHub Pages、自己写前端页面的全过程，希望对想搭博客的同学有一点帮助……
         </p>
-        <a href="#" class="post-readmore">
-          <span class="lang lang-zh">阅读全文 →</span>
-          <span class="lang lang-ja">続きを読む →</span>
-        </a>
+        <a href="#" class="post-readmore">阅读全文 →</a>
       </article>
 
       <!-- 文章卡片 2 -->
       <article class="post-card">
-        <a href="#" class="post-title">
-          <span class="lang lang-zh">写博客的三个好处</span>
-          <span class="lang lang-ja">ブログを書く 3 つのメリット</span>
-        </a>
+        <a href="#" class="post-title">写博客的三个好处</a>
         <div class="post-meta">
           <span>2025-11-10</span>
           <span>·</span>
-          <span class="lang lang-zh">瞎聊</span>
-          <span class="lang lang-ja">雑談</span>
+          <span>瞎聊</span>
         </div>
         <p class="post-excerpt">
-          <span class="lang lang-zh">
-            记忆是会背叛人的，但文字不会。写博客其实是在和未来的自己对话……
-          </span>
-          <span class="lang lang-ja">
-            記憶はいつか薄れていきますが、文章は残ります。ブログを書くことは、未来の自分と対話することでもあります……
-          </span>
+          记忆是会背叛人的，但文字不会。写博客其实是在和未来的自己对话……
         </p>
-        <a href="#" class="post-readmore">
-          <span class="lang lang-zh">阅读全文 →</span>
-          <span class="lang lang-ja">続きを読む →</span>
-        </a>
+        <a href="#" class="post-readmore">阅读全文 →</a>
       </article>
 
       <!-- TODO: 之后你可以复制上面的结构添加更多文章 -->
@@ -125,119 +68,42 @@
     <!-- 右侧：侧边栏 -->
     <aside class="sidebar" id="about">
       <section class="card">
-        <h3>
-          <span class="lang lang-zh">关于我</span>
-          <span class="lang lang-ja">プロフィール</span>
-        </h3>
+        <h3>关于我</h3>
         <p>
-          <span class="lang lang-zh">
-            这里写一句简单的自我介绍：比如「后端 / 前端 / 全栈 / 学生 / 打工人」，
-            兴趣爱好、正在学习的东西等。
-          </span>
-          <span class="lang lang-ja">
-            ここには簡単な自己紹介を書きます。たとえば「バックエンド / フロントエンド / フルスタック / 学生 / 社会人」、
-            趣味や勉強中の技術など。
-          </span>
+          这里写一句简单的自我介绍：比如「后端 / 前端 / 全栈 / 学生 / 打工人」，
+          兴趣爱好、正在学习的东西等。
         </p>
       </section>
 
       <section class="card">
-        <h3>
-          <span class="lang lang-zh">联系我</span>
-          <span class="lang lang-ja">連絡先</span>
-        </h3>
+        <h3>联系我</h3>
         <ul class="contact-list">
-          <li>
-            <span class="lang lang-zh">邮箱：</span>
-            <span class="lang lang-ja">メール：</span>
-            <a href="mailto:example@example.com">example@example.com</a>
-          </li>
-          <li>
-            <span class="lang lang-zh">GitHub：</span>
-            <span class="lang lang-ja">GitHub：</span>
-            <a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a>
-          </li>
+          <li>邮箱：<a href="mailto:example@example.com">example@example.com</a></li>
+          <li>GitHub：<a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a></li>
         </ul>
       </section>
 
       <section class="card">
-        <h3>
-          <span class="lang lang-zh">标签</span>
-          <span class="lang lang-ja">タグ</span>
-        </h3>
+        <h3>标签</h3>
         <div class="tag-list">
-          <span class="tag">
-            <span class="lang lang-zh">编程</span>
-            <span class="lang lang-ja">プログラミング</span>
-          </span>
-          <span class="tag">
-            <span class="lang lang-zh">生活</span>
-            <span class="lang lang-ja">ライフ</span>
-          </span>
-          <span class="tag">
-            <span class="lang lang-zh">折腾</span>
-            <span class="lang lang-ja">いじる</span>
-          </span>
-          <span class="tag">
-            <span class="lang lang-zh">随笔</span>
-            <span class="lang lang-ja">エッセイ</span>
-          </span>
+          <span class="tag">编程</span>
+          <span class="tag">生活</span>
+          <span class="tag">折腾</span>
+          <span class="tag">随笔</span>
         </div>
       </section>
     </aside>
   </main>
 
-  <!-- 页脚 -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <span class="lang lang-zh">
-        © <span id="year"></span> 我的博客. 由 GitHub Pages 驱动。
-      </span>
-      <span class="lang lang-ja">
-        © <span id="year-ja"></span> 私のブログ. GitHub Pages によって公開。
-      </span>
+      <span>© <span id="year"></span> 我的博客. Powered by GitHub Pages.</span>
     </div>
   </footer>
 
-  <!-- 小脚本：自动显示年份 + 语言切换逻辑 -->
+  <!-- 小脚本：自动显示年份 -->
   <script>
-    // 年份
-    var year = new Date().getFullYear();
-    document.getElementById("year").textContent = year;
-    document.getElementById("year-ja").textContent = year;
-
-    // 语言切换
-    (function () {
-      var htmlEl = document.documentElement;
-      var buttons = document.querySelectorAll(".lang-btn");
-
-      // 从 localStorage 读取语言（如果有）
-      var savedLang = localStorage.getItem("blog-lang");
-      if (savedLang === "zh" || savedLang === "ja") {
-        setLang(savedLang);
-      } else {
-        setLang("zh");
-      }
-
-      buttons.forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var lang = this.getAttribute("data-lang");
-          setLang(lang);
-        });
-      });
-
-      function setLang(lang) {
-        htmlEl.setAttribute("data-lang", lang);
-        localStorage.setItem("blog-lang", lang);
-
-        buttons.forEach(function (btn) {
-          btn.classList.toggle(
-            "active",
-            btn.getAttribute("data-lang") === lang
-          );
-        });
-      }
-    })();
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
