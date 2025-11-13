@@ -1,1 +1,1069 @@
-q
++<!DOCTYPE html>
++<html lang="zh-Hans">
++<head>
++    <meta charset="UTF-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <title>我的博客花园</title>
++    <link rel="preconnect" href="https://fonts.googleapis.com">
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
++    <style>
++        :root {
++            color-scheme: light dark;
++            --bg: #f3f4f6;
++            --card: rgba(255, 255, 255, 0.9);
++            --primary: #6c5ce7;
++            --primary-dark: #4b36c0;
++            --accent: #00b894;
++            --text: #1f2937;
++            --text-light: #6b7280;
++            --shadow: 0 20px 45px rgba(76, 81, 191, 0.12);
++        }
++
++        * {
++            box-sizing: border-box;
++        }
++
++        body {
++            margin: 0;
++            font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
++            background: linear-gradient(180deg, rgba(232, 240, 255, 0.6) 0%, rgba(255, 255, 255, 0.9) 100%);
++            color: var(--text);
++            min-height: 100vh;
++        }
++
++        header {
++            background: radial-gradient(circle at top left, rgba(108, 92, 231, 0.85) 0%, rgba(108, 92, 231, 0.45) 35%, rgba(99, 205, 218, 0.4) 100%);
++            color: #fff;
++            padding: 70px 20px 90px;
++            position: relative;
++            overflow: hidden;
++        }
++
++        header::after {
++            content: "";
++            position: absolute;
++            width: 480px;
++            height: 480px;
++            border-radius: 50%;
++            background: rgba(255, 255, 255, 0.15);
++            top: -240px;
++            right: -160px;
++            filter: blur(0px);
++        }
++
++        .hero-content {
++            max-width: 980px;
++            margin: 0 auto;
++            position: relative;
++            z-index: 1;
++            text-align: center;
++        }
++
++        .hero-content h1 {
++            font-size: clamp(2.4rem, 4.6vw, 3.7rem);
++            margin-bottom: 18px;
++            letter-spacing: 2px;
++            text-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
++        }
++
++        .hero-content p {
++            font-size: 1.1rem;
++            line-height: 1.9;
++            max-width: 720px;
++            margin: 0 auto 24px;
++        }
++
++        nav {
++            display: flex;
++            justify-content: center;
++            gap: 16px;
++            flex-wrap: wrap;
++            margin-top: 28px;
++        }
++
++        nav a,
++        nav button {
++            color: #fff;
++            text-decoration: none;
++            padding: 12px 22px;
++            border-radius: 999px;
++            border: 1px solid rgba(255, 255, 255, 0.2);
++            background: rgba(255, 255, 255, 0.08);
++            backdrop-filter: blur(8px);
++            font-weight: 500;
++            cursor: pointer;
++            transition: all 0.25s ease;
++        }
++
++        nav a:hover,
++        nav button:hover {
++            background: rgba(255, 255, 255, 0.2);
++            transform: translateY(-2px);
++        }
++
++        main {
++            max-width: 1200px;
++            margin: -70px auto 60px;
++            padding: 0 20px 60px;
++        }
++
++        .layout {
++            display: grid;
++            grid-template-columns: 2fr 1fr;
++            gap: 28px;
++            align-items: flex-start;
++        }
++
++        @media (max-width: 1024px) {
++            .layout {
++                grid-template-columns: 1fr;
++            }
++        }
++
++        .post-grid {
++            display: grid;
++            gap: 22px;
++        }
++
++        .post-card {
++            background: var(--card);
++            border-radius: 22px;
++            padding: 22px;
++            box-shadow: var(--shadow);
++            backdrop-filter: blur(14px);
++            position: relative;
++            overflow: hidden;
++        }
++
++        .post-card::before {
++            content: "";
++            position: absolute;
++            inset: 0;
++            background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 184, 148, 0.12));
++            opacity: 0;
++            transition: opacity 0.35s ease;
++            pointer-events: none;
++        }
++
++        .post-card:hover::before {
++            opacity: 1;
++        }
++
++        .post-card h2 {
++            margin-top: 0;
++            font-size: 1.7rem;
++        }
++
++        .post-meta {
++            display: flex;
++            flex-wrap: wrap;
++            gap: 12px;
++            margin-bottom: 14px;
++            color: var(--text-light);
++            font-size: 0.95rem;
++        }
++
++        .tag {
++            background: rgba(108, 92, 231, 0.12);
++            color: var(--primary);
++            padding: 4px 10px;
++            border-radius: 999px;
++            font-size: 0.85rem;
++        }
++
++        .post-image {
++            width: 100%;
++            border-radius: 16px;
++            margin: 14px 0;
++            max-height: 280px;
++            object-fit: cover;
++        }
++
++        .post-content {
++            line-height: 1.8;
++            color: var(--text);
++            font-size: 1rem;
++        }
++
++        .post-actions {
++            margin-top: 22px;
++            display: flex;
++            gap: 12px;
++        }
++
++        .post-actions button {
++            padding: 10px 18px;
++            border-radius: 14px;
++            border: none;
++            cursor: pointer;
++            font-weight: 600;
++            background: rgba(108, 92, 231, 0.12);
++            color: var(--primary);
++            transition: transform 0.2s ease;
++        }
++
++        .post-actions button:hover {
++            transform: translateY(-2px);
++        }
++
++        aside {
++            display: flex;
++            flex-direction: column;
++            gap: 24px;
++        }
++
++        .glass-card {
++            background: var(--card);
++            border-radius: 24px;
++            padding: 24px;
++            box-shadow: var(--shadow);
++            backdrop-filter: blur(14px);
++        }
++
++        .glass-card h3 {
++            margin-top: 0;
++            display: flex;
++            align-items: center;
++            gap: 10px;
++        }
++
++        .music-player {
++            display: grid;
++            gap: 18px;
++        }
++
++        .player-controls {
++            display: flex;
++            gap: 14px;
++            justify-content: center;
++        }
++
++        .player-controls button {
++            padding: 12px 18px;
++            border-radius: 14px;
++            border: none;
++            background: var(--primary);
++            color: #fff;
++            cursor: pointer;
++            transition: transform 0.2s ease, box-shadow 0.2s ease;
++            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.25);
++        }
++
++        .player-controls button:hover {
++            transform: translateY(-1px);
++            box-shadow: 0 12px 30px rgba(108, 92, 231, 0.35);
++        }
++
++        .playlist {
++            display: grid;
++            gap: 10px;
++            max-height: 260px;
++            overflow: auto;
++        }
++
++        .playlist-item {
++            background: rgba(108, 92, 231, 0.08);
++            padding: 12px 14px;
++            border-radius: 16px;
++            display: flex;
++            justify-content: space-between;
++            align-items: center;
++            gap: 12px;
++            cursor: pointer;
++            transition: background 0.2s ease;
++        }
++
++        .playlist-item.active {
++            background: rgba(108, 92, 231, 0.22);
++            box-shadow: inset 0 0 0 1px rgba(108, 92, 231, 0.4);
++        }
++
++        .playlist-item button {
++            border: none;
++            background: none;
++            color: var(--primary);
++            cursor: pointer;
++            font-weight: 600;
++        }
++
++        .form-section {
++            background: var(--card);
++            padding: 28px;
++            border-radius: 24px;
++            box-shadow: var(--shadow);
++            backdrop-filter: blur(18px);
++            margin-top: 40px;
++        }
++
++        .form-section header {
++            background: none;
++            padding: 0;
++            color: inherit;
++        }
++
++        .form-section h2 {
++            margin: 0 0 20px;
++        }
++
++        form {
++            display: grid;
++            gap: 16px;
++        }
++
++        label {
++            display: grid;
++            gap: 8px;
++            font-weight: 600;
++            color: var(--text-light);
++        }
++
++        input[type="text"],
++        input[type="url"],
++        input[type="file"],
++        textarea {
++            padding: 12px 14px;
++            border-radius: 14px;
++            border: 1px solid rgba(108, 92, 231, 0.25);
++            background: rgba(255, 255, 255, 0.85);
++            font-size: 1rem;
++            font-family: inherit;
++        }
++
++        textarea {
++            resize: vertical;
++            min-height: 120px;
++        }
++
++        .rich-editor {
++            border: 1px solid rgba(108, 92, 231, 0.25);
++            border-radius: 16px;
++            overflow: hidden;
++            background: rgba(255, 255, 255, 0.9);
++        }
++
++        .editor-toolbar {
++            display: flex;
++            gap: 10px;
++            padding: 10px;
++            border-bottom: 1px solid rgba(108, 92, 231, 0.2);
++            background: rgba(108, 92, 231, 0.08);
++        }
++
++        .editor-toolbar button {
++            border: none;
++            background: rgba(108, 92, 231, 0.18);
++            color: var(--primary-dark);
++            border-radius: 10px;
++            padding: 8px 12px;
++            cursor: pointer;
++            font-weight: 600;
++        }
++
++        .editor-toolbar button:hover {
++            background: rgba(108, 92, 231, 0.35);
++            color: #fff;
++        }
++
++        .editor-area {
++            padding: 16px;
++            min-height: 180px;
++            outline: none;
++            line-height: 1.7;
++        }
++
++        .form-actions {
++            display: flex;
++            gap: 12px;
++            justify-content: flex-end;
++        }
++
++        .primary-btn {
++            background: linear-gradient(135deg, var(--primary), #a363d9);
++            color: #fff;
++            border: none;
++            padding: 12px 22px;
++            border-radius: 14px;
++            font-weight: 600;
++            cursor: pointer;
++            box-shadow: 0 15px 25px rgba(108, 92, 231, 0.35);
++        }
++
++        .secondary-btn {
++            background: rgba(108, 92, 231, 0.1);
++            color: var(--primary-dark);
++            border: none;
++            padding: 12px 22px;
++            border-radius: 14px;
++            font-weight: 600;
++            cursor: pointer;
++        }
++
++        .management-table {
++            width: 100%;
++            border-collapse: collapse;
++            margin-top: 24px;
++        }
++
++        .management-table th,
++        .management-table td {
++            padding: 12px 14px;
++            text-align: left;
++            border-bottom: 1px solid rgba(108, 92, 231, 0.18);
++        }
++
++        .management-table tbody tr:hover {
++            background: rgba(108, 92, 231, 0.08);
++        }
++
++        footer {
++            text-align: center;
++            padding: 30px 20px 60px;
++            color: var(--text-light);
++        }
++
++        .status-pill {
++            padding: 6px 12px;
++            border-radius: 999px;
++            font-size: 0.8rem;
++            background: rgba(0, 184, 148, 0.18);
++            color: var(--accent);
++        }
++
++        .hidden {
++            display: none !important;
++        }
++
++        .floating-toolbar {
++            position: fixed;
++            right: 22px;
++            bottom: 22px;
++            display: grid;
++            gap: 12px;
++            z-index: 30;
++        }
++
++        .floating-toolbar button {
++            padding: 14px 18px;
++            border-radius: 16px;
++            border: none;
++            background: var(--primary);
++            color: #fff;
++            font-weight: 600;
++            cursor: pointer;
++            box-shadow: 0 12px 25px rgba(108, 92, 231, 0.35);
++        }
++
++        .empty-state {
++            text-align: center;
++            padding: 40px 20px;
++            color: var(--text-light);
++        }
++
++        .empty-state svg {
++            width: 120px;
++            margin-bottom: 14px;
++            opacity: 0.6;
++        }
++    </style>
++</head>
++<body>
++    <header>
++        <div class="hero-content">
++            <h1>写给未来的自己</h1>
++            <p>这里是我的个人博客花园：记录灵感、整理思绪、收藏音乐。通过图形化的发布面板，我可以轻松地写作、排版、上传封面，还能管理既有文章。</p>
++            <nav>
++                <a href="#blog">博客主页</a>
++                <button id="toggleAdmin">打开/收起管理面板</button>
++                <a href="#music">随心播放</a>
++            </nav>
++        </div>
++    </header>
++
++    <main>
++        <div class="layout">
++            <section id="blog" class="post-grid">
++                <!-- Posts will be injected here -->
++            </section>
++
++            <aside>
++                <section id="music" class="glass-card music-player">
++                    <h3>🎧 私人音乐角落</h3>
++                    <audio id="audioPlayer" controls preload="metadata" style="width:100%"></audio>
++                    <div class="player-controls">
++                        <button id="prevTrack">⏮ 上一首</button>
++                        <button id="playPause">▶️/⏸ 切换</button>
++                        <button id="nextTrack">⏭ 下一首</button>
++                    </div>
++                    <form id="trackForm">
++                        <label>
++                            歌曲名称
++                            <input type="text" id="trackTitle" placeholder="例如：日光倾城" required />
++                        </label>
++                        <label>
++                            网络音频地址（mp3/aac）
++                            <input type="url" id="trackUrl" placeholder="https://example.com/song.mp3" />
++                        </label>
++                        <label>
++                            或者上传本地文件
++                            <input type="file" id="trackFile" accept="audio/*" />
++                        </label>
++                        <button class="primary-btn" type="submit">添加到播放列表</button>
++                    </form>
++                    <div class="playlist" id="playlist"></div>
++                </section>
++
++                <section class="glass-card">
++                    <h3>🧭 使用提示</h3>
++                    <ul>
++                        <li>点击右下角按钮即可随时打开图形化发帖面板。</li>
++                        <li>文章、音乐列表都会保存在浏览器的本地存储中。</li>
++                        <li>编辑器支持粗体、斜体、列表等基础排版工具。</li>
++                    </ul>
++                </section>
++            </aside>
++        </div>
++
++        <section id="adminPanel" class="form-section hidden">
++            <h2>文章发布与管理中心</h2>
++            <form id="postForm">
++                <input type="hidden" id="postId" />
++                <label>
++                    标题
++                    <input type="text" id="titleInput" placeholder="我的最新灵感" required />
++                </label>
++                <label>
++                    标签（逗号分隔）
++                    <input type="text" id="tagsInput" placeholder="生活, 随笔, 技术" />
++                </label>
++                <label>
++                    封面图地址（可选）
++                    <input type="url" id="coverInput" placeholder="https://example.com/cover.jpg" />
++                </label>
++                <label>
++                    内容摘要
++                    <textarea id="summaryInput" placeholder="写一段用于列表显示的导语"></textarea>
++                </label>
++                <label>
++                    正文（支持基础格式）
++                    <div class="rich-editor">
++                        <div class="editor-toolbar">
++                            <button type="button" data-command="bold">加粗</button>
++                            <button type="button" data-command="italic">斜体</button>
++                            <button type="button" data-command="insertUnorderedList">无序列表</button>
++                            <button type="button" data-command="insertOrderedList">有序列表</button>
++                            <button type="button" data-command="formatBlock" data-value="h3">小标题</button>
++                        </div>
++                        <div id="editor" class="editor-area" contenteditable="true" aria-label="文章正文"></div>
++                    </div>
++                </label>
++                <div class="form-actions">
++                    <button type="button" class="secondary-btn" id="resetForm">重置</button>
++                    <button type="submit" class="primary-btn">保存文章</button>
++                </div>
++            </form>
++
++            <table class="management-table" id="managementTable">
++                <thead>
++                    <tr>
++                        <th>标题</th>
++                        <th>标签</th>
++                        <th>更新时间</th>
++                        <th>状态</th>
++                        <th>操作</th>
++                    </tr>
++                </thead>
++                <tbody>
++                    <!-- rows -->
++                </tbody>
++            </table>
++        </section>
++    </main>
++
++    <div class="floating-toolbar">
++        <button id="newPostFloating">✏️ 写新文章</button>
++        <button id="scrollTop">⬆️ 回到顶部</button>
++    </div>
++
++    <footer>
++        © <span id="year"></span> 我的博客花园 · 用音乐和文字点亮生活
++    </footer>
++
++    <template id="postTemplate">
++        <article class="post-card" data-id="">
++            <div class="post-meta">
++                <span class="post-date"></span>
++                <span class="status-pill">已发布</span>
++            </div>
++            <h2 class="post-title"></h2>
++            <p class="post-summary"></p>
++            <img class="post-image hidden" alt="文章封面" />
++            <div class="post-content"></div>
++            <div class="post-tags"></div>
++            <div class="post-actions">
++                <button class="edit-post">编辑</button>
++                <button class="delete-post">删除</button>
++            </div>
++        </article>
++    </template>
++
++    <template id="playlistItemTemplate">
++        <div class="playlist-item" data-index="">
++            <span class="track-title"></span>
++            <div>
++                <button class="play-track">播放</button>
++                <button class="remove-track">删除</button>
++            </div>
++        </div>
++    </template>
++
++    <template id="emptyStateTemplate">
++        <div class="empty-state">
++            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
++                <path d="M4 5h16v14H4z" opacity="0.4" />
++                <path d="M4 9h16" />
++                <path d="M8 13h4" />
++                <path d="M8 17h8" />
++            </svg>
++            <p>还没有文章，快来写下第一篇吧！</p>
++        </div>
++    </template>
++
++    <script>
++        const storageKeys = {
++            posts: 'blog-posts',
++            playlist: 'blog-playlist',
++        };
++
++        const postTemplate = document.getElementById('postTemplate');
++        const playlistItemTemplate = document.getElementById('playlistItemTemplate');
++        const emptyStateTemplate = document.getElementById('emptyStateTemplate');
++
++        const blogContainer = document.getElementById('blog');
++        const managementTableBody = document.querySelector('#managementTable tbody');
++        const adminPanel = document.getElementById('adminPanel');
++
++        const titleInput = document.getElementById('titleInput');
++        const tagsInput = document.getElementById('tagsInput');
++        const summaryInput = document.getElementById('summaryInput');
++        const coverInput = document.getElementById('coverInput');
++        const editor = document.getElementById('editor');
++        const postIdInput = document.getElementById('postId');
++
++        const postForm = document.getElementById('postForm');
++        const resetFormBtn = document.getElementById('resetForm');
++
++        const toggleAdminBtn = document.getElementById('toggleAdmin');
++        const newPostFloatingBtn = document.getElementById('newPostFloating');
++        const scrollTopBtn = document.getElementById('scrollTop');
++
++        const audioPlayer = document.getElementById('audioPlayer');
++        const playlistContainer = document.getElementById('playlist');
++        const trackForm = document.getElementById('trackForm');
++        const trackTitleInput = document.getElementById('trackTitle');
++        const trackUrlInput = document.getElementById('trackUrl');
++        const trackFileInput = document.getElementById('trackFile');
++        const playPauseBtn = document.getElementById('playPause');
++        const prevTrackBtn = document.getElementById('prevTrack');
++        const nextTrackBtn = document.getElementById('nextTrack');
++
++        let posts = [];
++        let playlist = [];
++        let currentTrackIndex = 0;
++
++        const sampleData = {
++            posts: [
++                {
++                    id: crypto.randomUUID(),
++                    title: '你好，世界！',
++                    summary: '欢迎来到我的全新博客，这里记录探索、创意与生活的火花。',
++                    content: '<p>这是第一篇示例文章。使用右下角的快捷按钮进入管理面板，可以尝试编辑或删除它。</p><p>写作小提示：使用上方的排版按钮，为你的内容增加层次和节奏。</p>',
++                    tags: ['随笔', '生活'],
++                    cover: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80',
++                    updatedAt: new Date().toISOString(),
++                },
++            ],
++            playlist: [
++                {
++                    id: crypto.randomUUID(),
++                    title: 'Sunny Afternoon',
++                    src: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
++                    createdAt: new Date().toISOString(),
++                },
++            ],
++        };
++
++        function loadFromStorage(key, fallback) {
++            try {
++                const raw = localStorage.getItem(key);
++                if (!raw) return fallback;
++                return JSON.parse(raw);
++            } catch (err) {
++                console.error('读取本地存储出错', err);
++                return fallback;
++            }
++        }
++
++        function saveToStorage(key, value) {
++            localStorage.setItem(key, JSON.stringify(value));
++        }
++
++        function initData() {
++            posts = loadFromStorage(storageKeys.posts, sampleData.posts);
++            playlist = loadFromStorage(storageKeys.playlist, sampleData.playlist);
++
++            renderPosts();
++            renderManagementTable();
++            renderPlaylist();
++
++            if (playlist.length) {
++                loadTrack(0, false);
++            }
++        }
++
++        function formatDate(dateString) {
++            const date = new Date(dateString);
++            return date.toLocaleString('zh-CN', {
++                year: 'numeric',
++                month: '2-digit',
++                day: '2-digit',
++                hour: '2-digit',
++                minute: '2-digit',
++            });
++        }
++
++        function renderPosts() {
++            blogContainer.innerHTML = '';
++            if (posts.length === 0) {
++                blogContainer.appendChild(emptyStateTemplate.content.cloneNode(true));
++                return;
++            }
++
++            posts
++                .slice()
++                .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
++                .forEach((post) => {
++                    const node = postTemplate.content.cloneNode(true);
++                    const article = node.querySelector('article');
++                    article.dataset.id = post.id;
++                    node.querySelector('.post-title').textContent = post.title;
++                    node.querySelector('.post-summary').textContent = post.summary || '这篇文章还没有摘要。';
++                    node.querySelector('.post-date').textContent = formatDate(post.updatedAt);
++
++                    const postContent = node.querySelector('.post-content');
++                    postContent.innerHTML = post.content;
++
++                    const tagsWrapper = node.querySelector('.post-tags');
++                    tagsWrapper.innerHTML = '';
++                    if (post.tags?.length) {
++                        post.tags.forEach((tag) => {
++                            const span = document.createElement('span');
++                            span.className = 'tag';
++                            span.textContent = `# ${tag.trim()}`;
++                            tagsWrapper.appendChild(span);
++                        });
++                    }
++
++                    const imageEl = node.querySelector('.post-image');
++                    if (post.cover) {
++                        imageEl.src = post.cover;
++                        imageEl.classList.remove('hidden');
++                    } else {
++                        imageEl.classList.add('hidden');
++                    }
++
++                    blogContainer.appendChild(node);
++                });
++        }
++
++        function renderManagementTable() {
++            managementTableBody.innerHTML = '';
++            if (posts.length === 0) return;
++
++            posts
++                .slice()
++                .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
++                .forEach((post) => {
++                    const tr = document.createElement('tr');
++                    tr.innerHTML = `
++                        <td>${post.title}</td>
++                        <td>${post.tags ? post.tags.join(', ') : ''}</td>
++                        <td>${formatDate(post.updatedAt)}</td>
++                        <td><span class="status-pill">已发布</span></td>
++                        <td>
++                            <button class="secondary-btn" data-action="edit" data-id="${post.id}">编辑</button>
++                            <button class="secondary-btn" data-action="delete" data-id="${post.id}" style="background: rgba(255,99,132,0.18); color:#e63946;">删除</button>
++                        </td>
++                    `;
++                    managementTableBody.appendChild(tr);
++                });
++        }
++
++        function resetPostForm() {
++            postIdInput.value = '';
++            titleInput.value = '';
++            tagsInput.value = '';
++            summaryInput.value = '';
++            coverInput.value = '';
++            editor.innerHTML = '';
++            postForm.scrollIntoView({ behavior: 'smooth' });
++        }
++
++        function fillPostForm(post) {
++            postIdInput.value = post.id;
++            titleInput.value = post.title;
++            tagsInput.value = post.tags?.join(', ');
++            summaryInput.value = post.summary || '';
++            coverInput.value = post.cover || '';
++            editor.innerHTML = post.content;
++            adminPanel.classList.remove('hidden');
++            postForm.scrollIntoView({ behavior: 'smooth' });
++        }
++
++        function upsertPost(postData) {
++            const index = posts.findIndex((p) => p.id === postData.id);
++            if (index > -1) {
++                posts[index] = postData;
++            } else {
++                posts.push(postData);
++            }
++            saveToStorage(storageKeys.posts, posts);
++            renderPosts();
++            renderManagementTable();
++        }
++
++        function deletePost(id) {
++            posts = posts.filter((post) => post.id !== id);
++            saveToStorage(storageKeys.posts, posts);
++            renderPosts();
++            renderManagementTable();
++        }
++
++        postForm.addEventListener('submit', (event) => {
++            event.preventDefault();
++            const id = postIdInput.value || crypto.randomUUID();
++            const tags = tagsInput.value
++                .split(',')
++                .map((tag) => tag.trim())
++                .filter(Boolean);
++            const summary = summaryInput.value.trim();
++            const cover = coverInput.value.trim();
++
++            const postData = {
++                id,
++                title: titleInput.value.trim(),
++                tags,
++                summary,
++                cover,
++                content: editor.innerHTML.trim(),
++                updatedAt: new Date().toISOString(),
++            };
++
++            upsertPost(postData);
++            resetPostForm();
++        });
++
++        managementTableBody.addEventListener('click', (event) => {
++            const button = event.target.closest('button');
++            if (!button) return;
++            const action = button.dataset.action;
++            const id = button.dataset.id;
++            const post = posts.find((p) => p.id === id);
++            if (action === 'edit' && post) {
++                fillPostForm(post);
++            }
++            if (action === 'delete') {
++                if (confirm('确定要删除这篇文章吗？')) {
++                    deletePost(id);
++                }
++            }
++        });
++
++        blogContainer.addEventListener('click', (event) => {
++            const button = event.target.closest('button');
++            if (!button) return;
++            const card = event.target.closest('.post-card');
++            if (!card) return;
++            const id = card.dataset.id;
++            const post = posts.find((p) => p.id === id);
++            if (button.classList.contains('edit-post') && post) {
++                fillPostForm(post);
++            }
++            if (button.classList.contains('delete-post')) {
++                if (confirm('确定要删除这篇文章吗？')) {
++                    deletePost(id);
++                }
++            }
++        });
++
++        resetFormBtn.addEventListener('click', resetPostForm);
++
++        document.querySelector('.editor-toolbar').addEventListener('click', (event) => {
++            const button = event.target.closest('button');
++            if (!button) return;
++            const command = button.dataset.command;
++            const value = button.dataset.value || null;
++            document.execCommand(command, false, value);
++            editor.focus();
++        });
++
++        toggleAdminBtn.addEventListener('click', () => {
++            adminPanel.classList.toggle('hidden');
++            if (!adminPanel.classList.contains('hidden')) {
++                adminPanel.scrollIntoView({ behavior: 'smooth' });
++            }
++        });
++
++        newPostFloatingBtn.addEventListener('click', () => {
++            adminPanel.classList.remove('hidden');
++            resetPostForm();
++            editor.focus();
++        });
++
++        scrollTopBtn.addEventListener('click', () => {
++            window.scrollTo({ top: 0, behavior: 'smooth' });
++        });
++
++        document.getElementById('year').textContent = new Date().getFullYear();
++
++        function renderPlaylist() {
++            playlistContainer.innerHTML = '';
++            if (playlist.length === 0) {
++                const empty = document.createElement('p');
++                empty.textContent = '播放列表空空如也，添加一首喜欢的歌吧！';
++                empty.style.color = 'var(--text-light)';
++                playlistContainer.appendChild(empty);
++                return;
++            }
++
++            playlist.forEach((track, index) => {
++                const node = playlistItemTemplate.content.cloneNode(true);
++                const item = node.querySelector('.playlist-item');
++                item.dataset.index = index;
++                if (index === currentTrackIndex) {
++                    item.classList.add('active');
++                }
++                node.querySelector('.track-title').textContent = track.title;
++                playlistContainer.appendChild(node);
++            });
++        }
++
++        function loadTrack(index, autoplay = true) {
++            if (!playlist[index]) return;
++            currentTrackIndex = index;
++            audioPlayer.src = playlist[index].src;
++            audioPlayer.dataset.trackId = playlist[index].id;
++            renderPlaylist();
++            if (autoplay) {
++                audioPlayer.play().catch((err) => console.warn('自动播放被阻止：', err));
++            }
++        }
++
++        function addTrack(track) {
++            playlist.push(track);
++            saveToStorage(storageKeys.playlist, playlist);
++            renderPlaylist();
++            if (playlist.length === 1) {
++                loadTrack(0);
++            }
++        }
++
++        function removeTrack(index) {
++            playlist.splice(index, 1);
++            if (currentTrackIndex >= playlist.length) {
++                currentTrackIndex = Math.max(0, playlist.length - 1);
++            }
++            saveToStorage(storageKeys.playlist, playlist);
++            renderPlaylist();
++            if (playlist.length) {
++                loadTrack(currentTrackIndex, false);
++            } else {
++                audioPlayer.removeAttribute('src');
++                audioPlayer.load();
++            }
++        }
++
++        trackForm.addEventListener('submit', (event) => {
++            event.preventDefault();
++            const title = trackTitleInput.value.trim();
++            const url = trackUrlInput.value.trim();
++            const file = trackFileInput.files[0];
++
++            if (!title) {
++                alert('请为歌曲输入一个名字');
++                return;
++            }
++
++            const add = (src) => {
++                addTrack({
++                    id: crypto.randomUUID(),
++                    title,
++                    src,
++                    createdAt: new Date().toISOString(),
++                });
++                trackForm.reset();
++            };
++
++            if (file) {
++                const reader = new FileReader();
++                reader.onload = () => add(reader.result);
++                reader.onerror = () => alert('读取音频文件失败，请重试');
++                reader.readAsDataURL(file);
++                return;
++            }
++
++            if (url) {
++                add(url);
++            } else {
++                alert('请选择文件或输入网络音频地址');
++            }
++        });
++
++        playlistContainer.addEventListener('click', (event) => {
++            const playButton = event.target.closest('.play-track');
++            const removeButton = event.target.closest('.remove-track');
++            const item = event.target.closest('.playlist-item');
++            if (!item) return;
++            const index = Number(item.dataset.index);
++
++            if (playButton) {
++                loadTrack(index);
++            }
++
++            if (removeButton) {
++                if (confirm('要从播放列表中移除此歌曲吗？')) {
++                    removeTrack(index);
++                }
++            }
++        });
++
++        playPauseBtn.addEventListener('click', () => {
++            if (audioPlayer.paused) {
++                audioPlayer.play();
++            } else {
++                audioPlayer.pause();
++            }
++        });
++
++        prevTrackBtn.addEventListener('click', () => {
++            if (!playlist.length) return;
++            const nextIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
++            loadTrack(nextIndex);
++        });
++
++        nextTrackBtn.addEventListener('click', () => {
++            if (!playlist.length) return;
++            const nextIndex = (currentTrackIndex + 1) % playlist.length;
++            loadTrack(nextIndex);
++        });
++
++        audioPlayer.addEventListener('ended', () => {
++            if (!playlist.length) return;
++            const nextIndex = (currentTrackIndex + 1) % playlist.length;
++            loadTrack(nextIndex);
++        });
++
++        window.addEventListener('DOMContentLoaded', initData);
++    </script>
++</body>
++</html>
