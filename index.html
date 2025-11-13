@@ -117,3 +117,127 @@
           <span class="lang lang-zh">阅读全文 →</span>
           <span class="lang lang-ja">続きを読む →</span>
         </a>
+      </article>
+
+      <!-- TODO: 之后你可以复制上面的结构添加更多文章 -->
+    </section>
+
+    <!-- 右侧：侧边栏 -->
+    <aside class="sidebar" id="about">
+      <section class="card">
+        <h3>
+          <span class="lang lang-zh">关于我</span>
+          <span class="lang lang-ja">プロフィール</span>
+        </h3>
+        <p>
+          <span class="lang lang-zh">
+            这里写一句简单的自我介绍：比如「后端 / 前端 / 全栈 / 学生 / 打工人」，
+            兴趣爱好、正在学习的东西等。
+          </span>
+          <span class="lang lang-ja">
+            ここには簡単な自己紹介を書きます。たとえば「バックエンド / フロントエンド / フルスタック / 学生 / 社会人」、
+            趣味や勉強中の技術など。
+          </span>
+        </p>
+      </section>
+
+      <section class="card">
+        <h3>
+          <span class="lang lang-zh">联系我</span>
+          <span class="lang lang-ja">連絡先</span>
+        </h3>
+        <ul class="contact-list">
+          <li>
+            <span class="lang lang-zh">邮箱：</span>
+            <span class="lang lang-ja">メール：</span>
+            <a href="mailto:example@example.com">example@example.com</a>
+          </li>
+          <li>
+            <span class="lang lang-zh">GitHub：</span>
+            <span class="lang lang-ja">GitHub：</span>
+            <a href="https://github.com/你的用户名" target="_blank">github.com/你的用户名</a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>
+          <span class="lang lang-zh">标签</span>
+          <span class="lang lang-ja">タグ</span>
+        </h3>
+        <div class="tag-list">
+          <span class="tag">
+            <span class="lang lang-zh">编程</span>
+            <span class="lang lang-ja">プログラミング</span>
+          </span>
+          <span class="tag">
+            <span class="lang lang-zh">生活</span>
+            <span class="lang lang-ja">ライフ</span>
+          </span>
+          <span class="tag">
+            <span class="lang lang-zh">折腾</span>
+            <span class="lang lang-ja">いじる</span>
+          </span>
+          <span class="tag">
+            <span class="lang lang-zh">随笔</span>
+            <span class="lang lang-ja">エッセイ</span>
+          </span>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="lang lang-zh">
+        © <span id="year"></span> 我的博客. 由 GitHub Pages 驱动。
+      </span>
+      <span class="lang lang-ja">
+        © <span id="year-ja"></span> 私のブログ. GitHub Pages によって公開。
+      </span>
+    </div>
+  </footer>
+
+  <!-- 小脚本：自动显示年份 + 语言切换逻辑 -->
+  <script>
+    // 年份
+    var year = new Date().getFullYear();
+    document.getElementById("year").textContent = year;
+    document.getElementById("year-ja").textContent = year;
+
+    // 语言切换
+    (function () {
+      var htmlEl = document.documentElement;
+      var buttons = document.querySelectorAll(".lang-btn");
+
+      // 从 localStorage 读取语言（如果有）
+      var savedLang = localStorage.getItem("blog-lang");
+      if (savedLang === "zh" || savedLang === "ja") {
+        setLang(savedLang);
+      } else {
+        setLang("zh");
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var lang = this.getAttribute("data-lang");
+          setLang(lang);
+        });
+      });
+
+      function setLang(lang) {
+        htmlEl.setAttribute("data-lang", lang);
+        localStorage.setItem("blog-lang", lang);
+
+        buttons.forEach(function (btn) {
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-lang") === lang
+          );
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
