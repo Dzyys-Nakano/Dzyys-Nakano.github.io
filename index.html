@@ -11,7 +11,7 @@
         :root {
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --accent-color: #eab308; /* 强调色：琥珀黄 */
+            --accent-color: #eab308;
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -38,7 +38,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 100px; /* 为顶部悬浮导航留出空间 */
+            padding-top: 100px;
         }
 
         /* ================= 毛玻璃悬浮导航栏 ================= */
@@ -92,6 +92,7 @@
             font-size: 0.95rem;
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -108,6 +109,12 @@
             height: 3px;
             background-color: var(--accent-color);
             border-radius: 2px;
+        }
+
+        /* 解锁按钮特殊样式 */
+        .unlock-btn {
+            color: #eab308 !important;
+            font-weight: 600 !important;
         }
 
         .search-bar {
@@ -202,10 +209,8 @@
             background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
             border-radius: 16px;
             margin-bottom: 1.5rem;
-            /* 如果有真实图片，可以使用 object-fit: cover; */
         }
 
-        /* 模拟三张不同的文章配图渐变 */
         .card:nth-child(1) .card-img { background: linear-gradient(135deg, #38bdf8, #0284c7); }
         .card:nth-child(2) .card-img { background: linear-gradient(135deg, #fbbf24, #d97706); }
         .card:nth-child(3) .card-img { background: linear-gradient(135deg, #a78bfa, #6d28d9); }
@@ -251,7 +256,6 @@
             color: white;
         }
 
-        /* ================= 响应式设计 ================= */
         @media (max-width: 900px) {
             .navbar {
                 flex-direction: column;
@@ -283,17 +287,12 @@
             <div class="logo-icon"></div>
             Digital Nexus
         </a>
-        <ul class="nav-links">
+        <ul class="nav-links" id="nav-list">
             <li><a href="#" class="active">首页</a></li>
             <li><a href="https://nexus.voto/">论坛</a></li>
             <li><a href="https://vpn.dzyys.co.uk/login">自有1</a></li>
             <li><a href="https://vpn3.dzyys.co.uk/">自有3</a></li>
-            <li><a href="http://156.231.117.115:2095/app/login">JP IIJ 1</a></li>
-            <li><a href="http://156.246.89.72:2095/app/login">JP 2</a></li>
-            <li><a href="http://43.199.41.27:2095/app/login">HK AWS</a></li>
-            <li><a href="http://13.230.36.172:2095/app/login">JP AWS</a></li>
-            <li><a href="http://165.154.241.219:2095/app/login">JP 3</a></li>
-            <li><a href="http://23.165.20.151:2095/app/login">DE ZGO</a></li>
+            <li id="unlock-item"><a onclick="unlockNodes()" class="unlock-btn">🔒 节点解锁</a></li>
         </ul>
         <input type="text" class="search-bar" placeholder="搜索...">
     </nav>
@@ -312,7 +311,6 @@
             <p>在这个信息爆炸的时代，我们如何构建自己的数字工作流？本文将探讨如何利用现代工具提升效率，以及在 AI 浪潮下保持独立思考的重要性。</p>
             <a href="#" class="btn-outline">阅读更多</a>
         </article>
-
         <article class="card">
             <div class="card-img"></div>
             <div class="card-meta">2026-03-15 • 效率工具</div>
@@ -330,5 +328,84 @@
         </article>
     </main>
 
+    <script>
+        const SECRET_PWD = "114514"; 
+
+        // 2. 将敏感链接进行 Base64 编码存放，防止源码直接被搜出。
+        // 这段乱码是用 JSON 数组包含了你的敏感链接再 Base64 编码后的结果。
+        const encryptedData = "W3sibmFtZSI6IkpQIElJSiAxIiwidXJsIjoiaHR0cDovLzE1Ni4yMzEuMTE3LjExNToyMDk1L2FwcC9sb2dpbiJ9LHsibmFtZSI6IkpQIDIiLCJ1cmwiOiJodHRwOi8vMTU2LjI0Ni44OS43MjoyMDk1L2FwcC9sb2dpbiJ9LHsibmFtZSI6IkhLIEFXUyIsInVybCI6Imh0dHA6Ly80My4xOTkuNDEuMjc6MjA5NS9hcHAvbG9naW4ifSx7Im5hbWUiOiJKUCBBV1MiLCJ1cmwiOiJodHRwOi8vMTMuMjMwLjM2LjE3MjoyMDk1L2FwcC9sb2dpbiJ9LHsibmFtZSI6IkpQIDMiLCJ1cmwiOiJodHRwOi8vMTY1LjE1NC4yNDEuMjE5OjIwOTUvYXBwL2xvZ2luIn0seyJuYW1lIjoiREUgWkdPIiwidXJsIjoiaHR0cDovLzIzLjE2NS4yMC4xNTE6MjA5NS9hcHAvbG9naW4ifV0=";
+
+        // 解锁功能
+        function unlockNodes() {
+            let input = prompt("请输入访问密码以解锁隐藏节点：");
+            if (input === SECRET_PWD) {
+                try {
+                    // 解码数据
+                    let links = JSON.parse(decodeURIComponent(escape(atob(encryptedData))));
+                    let navList = document.getElementById('nav-list');
+                    let unlockItem = document.getElementById('unlock-item');
+                    
+                    // 移除解锁按钮
+                    if(unlockItem) unlockItem.remove();
+
+                    // 动态注入DOM
+                    links.forEach(link => {
+                        let li = document.createElement('li');
+                        let a = document.createElement('a');
+                        a.href = link.url;
+                        a.textContent = link.name;
+                        a.target = "_blank"; // 点击新标签页打开
+                        li.appendChild(a);
+                        navList.appendChild(li);
+                    });
+                } catch(e) {
+                    alert("数据解析异常！");
+                }
+            } else if (input !== null) {
+                alert("密码错误，访问被拒绝。");
+            }
+        }
+
+        // ================= 反制 F12 及源码审查 =================
+        
+        // 禁用右键菜单
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 禁用常用开发者快捷键
+        document.addEventListener('keydown', event => {
+            if (
+                event.key === 'F12' || 
+                (event.ctrlKey && event.shiftKey && event.key === 'I') || // Ctrl+Shift+I
+                (event.ctrlKey && event.shiftKey && event.key === 'J') || // Ctrl+Shift+J
+                (event.ctrlKey && event.shiftKey && event.key === 'C') || // Ctrl+Shift+C
+                (event.ctrlKey && event.key === 'u') || // Ctrl+U 查源码
+                (event.ctrlKey && event.key === 's')    // Ctrl+S 保存页面
+            ) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+        });
+
+        // 反调试机制：无限 debugger 循环（会让试图打开控制台的人卡死）
+        setInterval(function() {
+            check();
+        }, 2000);
+        
+        var check = function() {
+            function doCheck(a) {
+                if (("" + a / a)["length"] !== 1 || a % 2 === 0) {
+                    (function() {}["constructor"]("debugger")());
+                } else {
+                    (function() {}["constructor"]("debugger")());
+                }
+                doCheck(++a);
+            }
+            try {
+                doCheck(0);
+            } catch (err) {}
+        };
+        check();
+    </script>
 </body>
 </html>
